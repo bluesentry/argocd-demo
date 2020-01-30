@@ -18,3 +18,6 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  values: |-
+    args:
+      - --kubelet-preferred-address-types=InternalIP
