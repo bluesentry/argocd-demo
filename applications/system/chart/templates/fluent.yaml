@@ -1,4 +1,4 @@
-{{- $fluentdEnabled := and .Values.fluentd.enabled (not .Values.fluentbit.enabled) }}
+{{- $fluentdEnabled := and .Values.fluentdElasticsearch.enabled (not .Values.fluentbit.enabled) }}
 {{- if $fluentdEnabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -16,7 +16,7 @@ spec:
     repoURL: 'https://kiwigrid.github.io'
     targetRevision: 5.1.3
     chart: fluentd-elasticsearch
-    {{- with .Values.fluentd.values }}
+    {{- with .Values.fluentdElasticsearch.values }}
     helm:
       values: |-
 {{ toYaml . | indent 8 }}

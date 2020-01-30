@@ -24,25 +24,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: kibana
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    namespace: log-system
-    server: {{ .Values.spec.destination.server }}
-  project: {{ .Values.spec.destination.project }}
-  source:
-    repoURL: 'https://helm.elastic.co'
-    targetRevision: 7.5.1
-    chart: kibana
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
 {{- end -}}
