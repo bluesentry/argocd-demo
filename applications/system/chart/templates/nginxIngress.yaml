@@ -1,0 +1,28 @@
+{{ $root := .Values }}
+{{ range $name, $value := .Values.nginxIngress }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress-{{ $name }}
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: ingress-system
+    server: {{ $root.spec.destination.server }}
+  project: {{ $root.spec.destination.project }}
+  source:
+    repoURL: 'https://kubernetes-charts.storage.googleapis.com'
+    targetRevision: 1.24.7
+    chart: nginx-ingress
+  {{- with $value.values }}
+    helm:
+      values: |-
+{{ toYaml . | indent 8 }}
+        {{- end }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+{{ end }}
