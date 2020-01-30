@@ -31,3 +31,19 @@ spec:
     automated:
       prune: true
       selfHeal: true
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ingress-system
+spec:
+  finalizers:
+    - kubernetes
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: log-system
+spec:
+  finalizers:
+    - kubernetes

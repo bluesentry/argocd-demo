@@ -1,0 +1,26 @@
+{{ $fluentdEnabled := and .Values.fluentd.enabled (not .Values.fluentbit.enabled) }}
+{{ if $fluentdEnabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fluentd-elasticsearch
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: log-system
+    server: {{ .Values.spec.destination.server }}
+  project: {{ .Values.spec.destination.project }}
+  source:
+    repoURL: 'https://kiwigrid.github.io'
+    targetRevision: 5.1.3
+    chart: fluentd-elasticsearch
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  values: |-
+    elasticsearch:
+      logstashPrefix: logs
+{{ end }}

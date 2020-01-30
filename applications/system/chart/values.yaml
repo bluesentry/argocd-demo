@@ -1,4 +1,8 @@
-elasicsearch:
+elasticsearch:
+  enabled: true
+fluentbit:
+  enabled: false
+fluentd:
   enabled: true
 metricsServer:
   enabled: true
