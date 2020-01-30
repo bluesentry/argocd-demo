@@ -15,7 +15,7 @@ spec:
     repoURL: 'https://kubernetes-charts.storage.googleapis.com'
     targetRevision: 2.1.3
     chart: elasticsearch-curator
-    {{- with .Values.elasicsearchCurator.values }}
+    {{- with .Values.elasticsearchCurator.values }}
     helm:
       values: |-
         {{ toYaml . | indent 8 }}
