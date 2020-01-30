@@ -58,4 +58,3 @@ metricsServer:
   enabled: true
 sealedSecretsController:
   enabled: true
-  values: {}
