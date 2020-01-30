@@ -4,6 +4,10 @@ fluentbit:
   enabled: false
 fluentd:
   enabled: true
+  values:
+    elasticsearch:
+      logstashPrefix: logs
+      host: elasticsearch-master
 metricsServer:
   enabled: true
 spec:

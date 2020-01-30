@@ -20,7 +20,8 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  {{ with .Values.fluentd.values }}
   values: |-
-    elasticsearch:
-      logstashPrefix: logs
+    {{ toYaml . | indent 4 }}
+  {{ end }}
 {{ end }}
