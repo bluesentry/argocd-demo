@@ -1,3 +1,4 @@
+{{ if .Values.metricsServer.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -21,3 +22,4 @@ spec:
   values: |-
     args:
       - --kubelet-preferred-address-types=InternalIP
+{{ end }}
