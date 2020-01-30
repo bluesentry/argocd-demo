@@ -26,8 +26,6 @@ anchoreEngine:
     anchoreAnalyzer:
       annotations:
         iam.amazonaws.com/role: k8s-anchore-engine
-      nodeSelector:
-        kubernetes.io/role: system
     anchoreApi:
       annotations:
         iam.amazonaws.com/role: k8s-anchore-engine
