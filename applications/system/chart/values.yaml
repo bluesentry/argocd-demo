@@ -4,7 +4,11 @@ spec:
     server: https://kubernetes.default.svc
 certManager:
   enabled: true
-  values: {}
+  values:
+    cainjector:
+      enabled: false
+    webhook:
+      enabled: false
 #    podAnnotations:
 #      iam.amazonaws.com/role: k8s-cert-manager
 #    ingressShim:
