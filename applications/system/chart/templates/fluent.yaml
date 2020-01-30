@@ -16,12 +16,13 @@ spec:
     repoURL: 'https://kiwigrid.github.io'
     targetRevision: 5.1.3
     chart: fluentd-elasticsearch
+    {{- with .Values.fluentd.values }}
+    helm:
+      values: |-
+{{ toYaml . | indent 8 }}
+    {{- end -}}
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-  {{- with .Values.fluentd.values }}
-  values: |-
-{{ toYaml . | indent 4 }}
-  {{- end -}}
 {{- end -}}

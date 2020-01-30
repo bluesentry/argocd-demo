@@ -27,6 +27,7 @@ spec:
   source:
     path: applications/system/chart
     repoURL: https://github.com/bluesentry/argocd-demo.git
+    helm: {}
   syncPolicy:
     automated:
       prune: true

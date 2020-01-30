@@ -15,14 +15,15 @@ spec:
     repoURL: 'https://helm.elastic.co'
     targetRevision: 7.5.1
     chart: elasticsearch
+    {{- with .Values.elasticsearch.values }}
+    helm:
+      values: |-
+{{ toYaml . | indent 8 }}
+    {{- end }}
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-  {{- with .Values.elasticsearch.values }}
-  values: |-
-{{ toYaml . | indent 4 }}
-{{- end }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
