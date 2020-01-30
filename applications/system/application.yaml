@@ -20,7 +20,7 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  project: systemn
+  project: system
   source:
     path: applications/system/chart
     repoURL: https://github.com/bluesentry/argocd-demo.git

@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: kube-system
     server: {{ .Values.spec.destination.server }}
-  project: default
+  project: {{ .Values.spec.destination.project }}
   source:
     repoURL: 'https://kubernetes-charts.storage.googleapis.com'
     targetRevision: 2.9.0
