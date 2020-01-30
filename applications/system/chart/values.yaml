@@ -9,6 +9,56 @@ spec:
     project: system
     server: https://kubernetes.default.svc
 
+anchoreEngine:
+  enabled: true
+  values:
+    postgresql:
+      persistence:
+        size: 50Gi
+    anchoreGlobal:
+      allowECRUseIAMRole: true
+      defaultAdminPassword: P@ssw0rd
+      defaultAdminEmail: support@bluesentryit.com
+      logLevel: WARN
+      extraEnv:
+        - name: ANCHORE_LOG_LEVEL
+          value: WARN
+    anchoreAnalyzer:
+      annotations:
+        iam.amazonaws.com/role: k8s-anchore-engine
+      nodeSelector:
+        kubernetes.io/role: system
+    anchoreApi:
+      annotations:
+        iam.amazonaws.com/role: k8s-anchore-engine
+      nodeSelector:
+        kubernetes.io/role: system
+    anchoreCatalog:
+      annotations:
+        iam.amazonaws.com/role: k8s-anchore-engine
+      nodeSelector:
+        kubernetes.io/role: system
+    anchorePolicyEngine:
+      annotations:
+        iam.amazonaws.com/role: k8s-anchore-engine
+      nodeSelector:
+        kubernetes.io/role: system
+    anchoreSimpleQueue:
+      annotations:
+        iam.amazonaws.com/role: k8s-anchore-engine
+      nodeSelector:
+        kubernetes.io/role: system
+    ingress:
+      enabled: true
+      apiHosts:
+        - anchore-api
+      annotations:
+        kubernetes.io/ingress.class: nginx-internal
+        certmanager.k8s.io/cluster-issuer: letsencrypt-production
+      tls:
+        - hosts:
+            - anchore-api
+          secretName: anchoreapi
 certManager:
   enabled: true
   values:
