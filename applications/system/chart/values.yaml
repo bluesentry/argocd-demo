@@ -13,7 +13,7 @@ elasticsearch:
     rbac:
       create: true
 elasticsearchCurator:
-  enabled: false
+  enabled: true
   values:
     cronjob:
       schedule: 0 1 * * *
