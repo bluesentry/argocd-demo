@@ -41,9 +41,6 @@ clusterAutoscaler:
     rbac:
       create: true
     sslCertPath: /etc/kubernetes/pki/ca.crt
-    serviceMonitor:
-      enabled: true
-      namespace: kube-system
 elasticsearch:
   enabled: true
   values:
