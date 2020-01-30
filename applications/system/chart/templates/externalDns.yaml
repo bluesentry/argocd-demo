@@ -1,21 +1,21 @@
-{{- if .Values.sealedSecretsController.enabled }}
+{{- if .Values.externalDns.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sealed-secrets-controller
+  name: external-dns
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: kube-system
+    namespace: ingress-system
     server: {{ .Values.spec.destination.server }}
   project: {{ .Values.spec.destination.project }}
   source:
     repoURL: 'https://kubernetes-charts.storage.googleapis.com'
-    targetRevision: 1.5.0
-    chart: sealed-secrets
-    {{- with .Values.sealedSecretsController.values }}
+    targetRevision: 2.16.0
+    chart: external-dns
+    {{- with .Values.externalDns.values }}
     helm:
       values: |-
 {{ toYaml . | indent 8 }}
