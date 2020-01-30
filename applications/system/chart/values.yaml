@@ -4,6 +4,12 @@ spec:
     server: https://kubernetes.default.svc
 certManager:
   enabled: true
+  values: {}
+#    podAnnotations:
+#      iam.amazonaws.com/role: k8s-cert-manager
+#    ingressShim:
+#      defaultACMEChallengeType: dns01
+#      defaultACMEDNS01ChallengeProvider: route53
 elasticsearch:
   enabled: true
   values:
