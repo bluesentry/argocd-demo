@@ -1,3 +1,8 @@
+spec:
+  destination:
+    project: system
+    server: https://kubernetes.default.svc
+
 elasticsearch:
   enabled: true
   values:
@@ -51,7 +56,5 @@ fluentdElasticsearch:
       host: elasticsearch-master
 metricsServer:
   enabled: true
-spec:
-  destination:
-    project: system
-    server: https://kubernetes.default.svc
+sealedSecretsController:
+  enabled: true
