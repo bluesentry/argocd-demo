@@ -4,6 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-options: Validate=false
   name: certificaterequests.cert-manager.io
 spec:
   additionalPrinterColumns:
@@ -195,6 +196,9 @@ spec:
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-options: Validate=false
   name: certificates.cert-manager.io
 spec:
   additionalPrinterColumns:
@@ -476,6 +480,9 @@ spec:
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-options: Validate=false
   name: challenges.acme.cert-manager.io
 spec:
   additionalPrinterColumns:
@@ -1868,6 +1875,9 @@ spec:
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-options: Validate=false
   name: clusterissuers.cert-manager.io
 spec:
   additionalPrinterColumns:
@@ -3608,6 +3618,9 @@ spec:
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-options: Validate=false
   name: issuers.cert-manager.io
 spec:
   additionalPrinterColumns:
@@ -5348,6 +5361,9 @@ spec:
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
 metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-options: Validate=false
   name: orders.acme.cert-manager.io
 spec:
   additionalPrinterColumns:
