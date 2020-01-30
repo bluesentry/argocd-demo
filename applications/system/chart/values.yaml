@@ -14,9 +14,9 @@ elasticsearch:
       create: true
 elasticsearchCurator:
   enabled: true
-  values:
-    cronjob:
-      schedule: 0 1 * * *
+  values: {}
+#    cronjob:
+#      schedule: 0 1 * * *
 #      configMaps:
 #        action_file_yml: |-
 #          ---
