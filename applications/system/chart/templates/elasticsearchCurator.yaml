@@ -19,7 +19,7 @@ spec:
     helm:
       values: |-
         {{ toYaml . | indent 8 }}
-  {{- end -}}
+  {{- end }}
   syncPolicy:
     automated:
       prune: true
