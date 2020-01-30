@@ -1,3 +1,5 @@
+elasicsearch:
+  enabled: true
 metricsServer:
   enabled: true
 spec:
