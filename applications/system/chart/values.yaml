@@ -57,5 +57,4 @@ fluentdElasticsearch:
 metricsServer:
   enabled: true
 sealedSecretsController:
-  enabled: false
-  values: {}
+  enabled: true
