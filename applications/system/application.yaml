@@ -23,10 +23,6 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  ignoreDifferences:
-    - kind: CustomResourceDefinition
-      jsonPointers:
-        - /spec/preserveUnknownFields
   project: system
   source:
     path: applications/system/chart

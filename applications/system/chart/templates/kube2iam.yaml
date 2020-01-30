@@ -1,0 +1,27 @@
+{{- if .Values.kube2iam.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube2iam
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: kube-system
+    server: {{ .Values.spec.destination.server }}
+  project: {{ .Values.spec.destination.project }}
+  source:
+    repoURL: 'https://kubernetes-charts.storage.googleapis.com'
+    targetRevision: 2.1.0
+    chart: kube2iam
+    {{- with .Values.kube2iam.values }}
+    helm:
+      values: |-
+{{ toYaml . | indent 8 }}
+    {{- end }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  {{- end -}}

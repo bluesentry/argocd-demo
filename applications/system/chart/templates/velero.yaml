@@ -1,0 +1,27 @@
+{{- if .Values.velero.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: velero
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: kube-system
+    server: {{ .Values.spec.destination.server }}
+  project: {{ .Values.spec.destination.project }}
+  source:
+    repoURL: 'https://vmware-tanzu.github.io/helm-charts/'
+    targetRevision: 2.8.1
+    chart: velero
+    {{- with .Values.velero.values }}
+    helm:
+      values: |-
+{{ toYaml . | indent 8 }}
+    {{- end }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  {{- end -}}

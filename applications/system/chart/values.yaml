@@ -1,7 +1,13 @@
+.defaults:
+  awsRegion: &awsRegion us-east-2
+  clusterName: &clusterName demoapp
+  veleraBucker: &veleroBucket backup.aws
+
 spec:
   destination:
     project: system
     server: https://kubernetes.default.svc
+
 certManager:
   enabled: true
   values:
@@ -14,6 +20,30 @@ certManager:
 #    ingressShim:
 #      defaultACMEChallengeType: dns01
 #      defaultACMEDNS01ChallengeProvider: route53
+clusterAutoscaler:
+  enabled: true
+  values:
+    nameOverride: "cluster-autoscaler"
+    autoDiscovery:
+      clusterName: *clusterName
+    awsRegion: *awsRegion
+    cloudProvider: aws
+    extraArgs:
+      balance-similar-node-groups:
+      ignore-daemonsets-utilization: "true"
+      skip-nodes-with-local-storage: "false"
+      skip-nodes-with-system-pods: "false"
+      scale-down-utilization-threshold: "0.65"
+    image:
+      tag: v1.14.7
+    podAnnotations:
+      iam.amazonaws.com/role: k8s-cluster-autoscaler
+    rbac:
+      create: true
+    sslCertPath: /etc/kubernetes/pki/ca.crt
+    serviceMonitor:
+      enabled: true
+      namespace: kube-system
 elasticsearch:
   enabled: true
   values:
@@ -65,6 +95,21 @@ fluentdElasticsearch:
     elasticsearch:
       logstashPrefix: logs
       host: elasticsearch-master
+kube2iam:
+  enabled: true
+  values:
+    aws:
+      region: *awsRegion
+    extraArgs:
+      auto-discover-base-arn: ""
+      default-role: k8s-default-role
+    host:
+      iptables: true
+      interface: eni+
+    rbac:
+      create: true
+    tolerations:
+      - operator: Exists
 metricsServer:
   enabled: true
 nginxIngress:
@@ -98,3 +143,32 @@ nginxIngress:
             omitClusterIP: true
 sealedSecretsController:
   enabled: true
+velero:
+  enabled: true
+  values:
+    configuration:
+      backupStorageLocation:
+        name: aws
+        bucket: *veleroBucket
+        config:
+          region: *awsRegion
+      provider: aws
+      volumeSnapshotLocation:
+        config:
+          region: *awsRegion
+        name: aws
+      credentials:
+        useSecret: false
+      deployRestic: true
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+      podAnnotations:
+        iam.amazonaws.com/role: k8s-velero
+      initContainers:
+        - image: velero/velero-plugin-for-aws:v1.0.0
+          name: velero-plugin-for-aws
+          volumeMounts:
+            - mountPath: /target
+              name: plugins

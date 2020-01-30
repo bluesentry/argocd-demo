@@ -1,0 +1,27 @@
+{{- if .Values.clusterAutoscaler.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-autoscaler
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: kube-system
+    server: {{ .Values.spec.destination.server }}
+  project: {{ .Values.spec.destination.project }}
+  source:
+    repoURL: 'https://kubernetes-charts.storage.googleapis.com'
+    targetRevision: 6.3.0
+    chart: cluster-autoscaler
+    {{- with .Values.clusterAutoscaler.values }}
+    helm:
+      values: |-
+{{ toYaml . | indent 8 }}
+    {{- end }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  {{- end -}}
