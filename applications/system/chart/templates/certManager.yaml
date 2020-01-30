@@ -18,7 +18,7 @@ spec:
     {{- with .Values.certManager.values }}
     helm:
       values: |-
-        {{ toYaml . | indent 8 }}
+{{ toYaml . | indent 8 }}
     {{- end }}
   syncPolicy:
     automated:
