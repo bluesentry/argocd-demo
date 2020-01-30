@@ -14,3 +14,7 @@ spec:
     repoURL: 'https://kubernetes-charts.storage.googleapis.com'
     targetRevision: 2.9.0
     chart: metrics-server
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
