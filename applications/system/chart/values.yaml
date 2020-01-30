@@ -56,5 +56,34 @@ fluentdElasticsearch:
       host: elasticsearch-master
 metricsServer:
   enabled: true
+nginxIngress:
+  private:
+    values:
+      controller:
+        extraArgs:
+          enable-ssl-passthrough: ""
+        ingressClass: nginx-internal
+        publishService:
+          enabled: true
+        service:
+          annotations:
+            service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
+          omitClusterIP: true
+        defaultBackend:
+          service:
+            omitClusterIP: true
+  public:
+    values:
+      controller:
+        extraArgs:
+          enable-ssl-passthrough: ""
+        ingressClass: nginx
+        publishService:
+          enabled: true
+        service:
+          omitClusterIP: true
+        defaultBackend:
+          service:
+            omitClusterIP: true
 sealedSecretsController:
   enabled: true
