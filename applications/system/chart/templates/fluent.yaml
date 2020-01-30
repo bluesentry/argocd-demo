@@ -1,5 +1,5 @@
-{{ $fluentdEnabled := and .Values.fluentd.enabled (not .Values.fluentbit.enabled) }}
-{{ if $fluentdEnabled }}
+{{- $fluentdEnabled := and .Values.fluentd.enabled (not .Values.fluentbit.enabled) }}
+{{- if $fluentdEnabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -20,8 +20,8 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  {{ with .Values.fluentd.values }}
+  {{- with .Values.fluentd.values }}
   values: |-
-    {{ toYaml . | indent 4 }}
-  {{ end }}
-{{ end }}
+{{ toYaml . | indent 4 }}
+  {{- end -}}
+{{- end -}}

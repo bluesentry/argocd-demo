@@ -1,4 +1,4 @@
-{{ if .Values.elasticsearch.enabled }}
+{{- if .Values.elasticsearch.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -19,13 +19,10 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  {{- with .Values.elasticsearch.values }}
   values: |-
-    antiAffinityTopologyKey: failure-domain.beta.kubernetes.io/zone
-    esConfig:
-      elasticsearch.yml: |
-        http.max_content_length: 500mb
-    rbac:
-      create: true
+{{ toYaml . | indent 4 }}
+{{- end }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -47,4 +44,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
-{{ end }}
+{{- end -}}

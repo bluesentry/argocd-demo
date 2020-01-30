@@ -1,5 +1,12 @@
 elasticsearch:
   enabled: true
+  values:
+    antiAffinityTopologyKey: failure-domain.beta.kubernetes.io/zone
+    esConfig:
+      elasticsearch.yml: |
+        http.max_content_length: 500mb
+    rbac:
+      create: true
 fluentbit:
   enabled: false
 fluentd:
