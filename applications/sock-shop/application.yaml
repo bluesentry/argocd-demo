@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: sock-shop
+  namespace: argocd
+spec:
+  description: Sock-shop Applications
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sock-shop
+  namespace: argocd
+spec:
+  destination:
+    namespace: sock-shop
+    server: https://kubernetes.default.svc
+  project: sock-shop
+  source:
+    path: deploy/kubernetes/helm-chart
+    repoURL: https://github.com/mhauke/nks-sock-shop-demo.git
+    helm: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sock-shop
+spec:
+  finalizers:
+    - kubernetes
