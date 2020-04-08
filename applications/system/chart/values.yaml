@@ -99,6 +99,9 @@ elasticsearch:
         http.max_content_length: 500mb
     rbac:
       create: true
+    resources:
+      requests:
+        memory: "1Gi"
 elasticsearchCurator:
   enabled: true
   values:
