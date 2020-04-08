@@ -292,18 +292,18 @@ velero:
         config:
           region: *awsRegion
         name: aws
-      credentials:
-        useSecret: false
-      deployRestic: true
-      metrics:
+    credentials:
+      useSecret: false
+    deployRestic: true
+    metrics:
+      enabled: true
+      serviceMonitor:
         enabled: true
-        serviceMonitor:
-          enabled: true
-      podAnnotations:
-        iam.amazonaws.com/role: k8s-demo-velero
-      initContainers:
-        - image: velero/velero-plugin-for-aws:v1.0.0
-          name: velero-plugin-for-aws
-          volumeMounts:
-            - mountPath: /target
-              name: plugins
+    podAnnotations:
+      iam.amazonaws.com/role: k8s-demo-velero
+    initContainers:
+      - image: velero/velero-plugin-for-aws:v1.0.0
+        name: velero-plugin-for-aws
+        volumeMounts:
+          - mountPath: /target
+            name: plugins
