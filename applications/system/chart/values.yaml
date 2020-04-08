@@ -2,7 +2,7 @@
   awsRegion: &awsRegion us-east-1
   clusterName: &clusterName demo
   domain: &domain bsisandbox.com
-  veleraBucker: &veleroBucket backup.aws
+  veleroBucket: &veleroBucket backups.demo.us-east-1.bsisandbox.com
 
 spec:
   destination:
