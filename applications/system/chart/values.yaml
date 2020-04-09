@@ -223,17 +223,17 @@ prometheusOperator:
               resources:
                 requests:
                   storage: 50Gi
-#      ingress:
-#        enabled: true
-#        annotations:
-#          kubernetes.io/ingress.class: nginx-internal
-#          certmanager.k8s.io/cluster-issuer: letsencrypt-production
-#        hosts:
-#          - &alertmanagerHostname alertmanager
-#        tls:
-#          - hosts:
-#              - *alertmanagerHostname
-#            secretName: *alertmanagerHostname
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx-internal
+          certmanager.k8s.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - &alertmanagerHostname alertmanager
+        tls:
+          - hosts:
+              - *alertmanagerHostname
+            secretName: *alertmanagerHostname
     defaultRules:
       rules:
         kubernetesResources: false
@@ -246,29 +246,29 @@ prometheusOperator:
         GF_AUTH_BASIC_ENABLED: "false"
         GF_AUTH_ANONYMOUS_ENABLED: "true"
         GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
-#      ingress:
-#        enabled: true
-#        annotations:
-#          kubernetes.io/ingress.class: nginx-internal
-#          certmanager.k8s.io/cluster-issuer: letsencrypt-production
-#        hosts:
-#          - &grafanaHostname grafana
-#        tls:
-#          - hosts:
-#              - *grafanaHostname
-#            secretName: *grafanaHostname
-#    prometheus:
-#      ingress:
-#        enabled: true
-#        annotations:
-#          kubernetes.io/ingress.class: nginx-internal
-#          certmanager.k8s.io/cluster-issuer: letsencrypt-production
-#        hosts:
-#          - &prometheusHostname prometheus
-#        tls:
-#          - hosts:
-#              - *prometheusHostname
-#            secretName: *prometheusHostname
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx-internal
+          certmanager.k8s.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - &grafanaHostname grafana
+        tls:
+          - hosts:
+              - *grafanaHostname
+            secretName: *grafanaHostname
+    prometheus:
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: nginx-internal
+          certmanager.k8s.io/cluster-issuer: letsencrypt-production
+        hosts:
+          - &prometheusHostname prometheus
+        tls:
+          - hosts:
+              - *prometheusHostname
+            secretName: *prometheusHostname
       prometheusSpec:
         retention: 30d
         storageSpec:
