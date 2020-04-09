@@ -64,11 +64,11 @@ certManager:
       enabled: false
     webhook:
       enabled: false
-#    podAnnotations:
-#      iam.amazonaws.com/role: k8s-demo-cert-manager
-#    ingressShim:
-#      defaultACMEChallengeType: dns01
-#      defaultACMEDNS01ChallengeProvider: route53
+    podAnnotations:
+      iam.amazonaws.com/role: k8s-demo-cert-manager
+    ingressShim:
+      defaultACMEChallengeType: dns01
+      defaultACMEDNS01ChallengeProvider: route53
 clusterAutoscaler:
   enabled: true
   values:
