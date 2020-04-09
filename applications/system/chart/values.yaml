@@ -141,7 +141,7 @@ externalDns:
   values:
     aws:
       region: *awsRegion
-      roleArn: k8s-external-dns
+      roleArn: k8s-demo-external-dns
       zoneType: public
     domainFilters:
       - *domain
