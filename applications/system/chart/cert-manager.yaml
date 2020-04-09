@@ -1,0 +1,19 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: ClusterIssuer
+namespace: cert-manager
+metadata:
+  name: letsencrypt-production
+spec:
+  acme:
+    email: todd.bernson@bluesentryit.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-production-account-key
+    solvers:
+    - selector:
+        dnsZones:
+          - "bsisandbox.com"
+      dns01:
+        route53:
+          hostedZoneID: Z0513001X3L0IE4KY37F
+          region: us-east-1
