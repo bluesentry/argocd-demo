@@ -32,3 +32,17 @@ spec:
         route53:
           hostedZoneID: Z0513001X3L0IE4KY37F
           region: us-east-1
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: bsisandbox-cert
+  namespace: sock-shop
+spec:
+  secretName: bsisandbox-secret
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+  commonName: bsisandbox.com
+  dnsNames:
+    - bsisandbox.com
