@@ -191,6 +191,7 @@ nginxIngress:
           enabled: true
         service:
           annotations:
+            certmanager.k8s.io/cluster-issuer: letsencrypt-production
             service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
           omitClusterIP: true
         defaultBackend:
