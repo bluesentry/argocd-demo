@@ -52,7 +52,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host demo1.bsisandbox.com
+        - &host demo.bsisandbox.com
       secretName: *host
   rules:
   - host: *host
