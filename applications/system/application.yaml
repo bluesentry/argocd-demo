@@ -84,7 +84,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        - &host kibana.bsisandbox.com
+        - &host logs.bsisandbox.com
       secretName: *host
   rules:
     - host: *host
