@@ -13,7 +13,7 @@ spec:
   project: {{ .Values.spec.destination.project }}
   source:
     repoURL: 'https://kubernetes-charts.storage.googleapis.com'
-    targetRevision: 8.5.0
+    targetRevision: latest
     chart: prometheus-operator
     {{- with .Values.prometheusOperator.values }}
     helm:
