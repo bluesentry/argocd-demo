@@ -55,7 +55,8 @@ spec:
         - demo1.bsisandbox.com
       secretName: demo1.bsisandbox.com
   rules:
-  - http:
+  - host: demo1.bsisandbox.com
+    http:
       paths:
       - path: /
         backend:
