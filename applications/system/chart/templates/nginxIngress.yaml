@@ -14,7 +14,7 @@ spec:
   project: {{ $root.spec.destination.project }}
   source:
     repoURL: 'https://kubernetes-charts.storage.googleapis.com'
-    targetRevision: 1.29.6
+    targetRevision: 1.36.0
     chart: nginx-ingress
   {{- with $value.values }}
     helm:
